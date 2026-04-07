@@ -1,0 +1,56 @@
+# Installing the nginx server.
+- name: Install the nginx server.
+  ansible.builtin.dnf:
+    name: nginx
+    state: latest
+
+# Starting and enabling the nginx service.
+- name: Start and Enable the nginx service.
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: yes
+
+# # Removing the default application content from /usr/share/nginx/html/. We are deleting the entire html directory as we don’t have a module to delete all the files inside a directory.. Need to google about it once later.
+# - name: Remove the default application content from /usr/share/nginx/html/.
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: absent
+
+# # Creating a deleted html directory again.
+# - name: Create html directory which is deleted above.
+#   ansible.builtin.file:
+#     path: /usr/share/nginx/html
+#     state: directory
+
+# # Downloading and Extracting the frontend code into /usr/share/nginx/html.
+# - name: Download and extract the frontend code into /usr/share/nginx/html path.
+#   ansible.builtin.unarchive:
+#     src: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes
+
+# These above three steps are common for every role hence we kept them in a common role and importing that role to make the reusability.
+- name: Importing the common role.
+  tags:
+  - deployment
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: main.yml
+
+# Creating expense.conf.j2 file is created in /templates/ folder and configure the backend server host details inside it and copy this file to /etc/nginx/default.d/expense.conf
+- name: Create expense.conf file and configure the backend server details and copy this file to /etc/nginx/default.d/expense.conf.
+  ansible.builtin.template:
+    src: expense.conf.j2
+    dest: /etc/nginx/default.d/expense.conf
+
+  # Notifying the handler created in handler/ folder to restart the nginx service only when there is any changes in the expense.conf.j2 file.
+  notify:
+    - restart nginx
+
+# # Restarting the nginx service.
+# - name: Restart nginx service.
+#   ansible.builtin.service:
+#     name: nginx
+#     state: restarted
+...

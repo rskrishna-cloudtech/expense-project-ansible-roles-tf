@@ -1,0 +1,7 @@
+- name: Configure BACKEND Server
+  hosts: backend
+  become: yes
+
+  # Calling the backend roles folder which has the tasks/main.yml and vars/main.yml.
+  roles:
+    - backend

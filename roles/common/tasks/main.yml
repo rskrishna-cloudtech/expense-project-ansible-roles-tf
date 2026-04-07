@@ -1,0 +1,18 @@
+# Delete the /app directory.
+- name: Delete the /app directory.
+  ansible.builtin.file:
+    path: "{{ app_location }}"
+    state: absent
+
+# Create  /app directory.
+- name: Create /app directory.
+  ansible.builtin.file:
+    path: "{{ app_location }}"
+    state: directory
+
+# Downloading the code from the source location and extracting it.
+- name: Download and extract the code based on the component like backend and frontend.
+  ansible.builtin.unarchive:
+    src: "https://expense-builds.s3.us-east-1.amazonaws.com/expense-{{component}}-v2.zip"
+    dest: "{{ app_location }}"
+    remote_src: yes

@@ -1,0 +1,7 @@
+- name: Configure DB Server
+  hosts: db
+  become: yes
+
+  # Calling the db roles folder which has the tasks/main.yml and vars/main.yml.
+  roles:
+  - db

@@ -1,0 +1,5 @@
+# This is a handler to restart the nginx when there is any changed in the expense.conf.js file.
+- name: restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted

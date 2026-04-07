@@ -1,0 +1,6 @@
+login_user: root
+login_password: ExpenseApp@1
+login_host: db.expense.rskrishnacloudtech.online
+DB_HOST: db.expense.rskrishnacloudtech.online
+app_location: /app
+component: backend

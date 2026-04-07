@@ -1,0 +1,7 @@
+- name: Configure FRONTEND server.
+  hosts: frontend
+  become: yes
+
+  # Calling the frontend roles folder which has the tasks/main.yml and vars/main.yml.
+  roles:
+    - frontend

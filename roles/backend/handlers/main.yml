@@ -1,0 +1,4 @@
+# Reloading the daemon service only when the .service file changed.
+- name: Reload the daemon service
+  ansible.builtin.systemd_service:
+    daemon_reload: true
