@@ -4,7 +4,6 @@
   hosts: all
   connection: local
   vars_files:
-    - credentials.yml
     - "variables-{{ env }}.yml"
   become: yes
   roles:
