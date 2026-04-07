@@ -4,6 +4,7 @@
   hosts: all
   connection: local
   vars_files:
+    - credentails.yml
     - "variables-{{ env }}.yml"
   become: yes
   roles:
