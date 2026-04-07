@@ -1,9 +1,10 @@
 # This is a common main file to call each role based on the component. We have to pass the component name as an argument from the command line.
 
 - name: "Configure {{ component }} server"
-  hosts: "{{ component }}"
+  hosts: localhost
+  connection: local
   vars_files:
-    - credentials.yml
+    - "variables-{{ environment }}.yml"
   become: yes
   roles:
     - "{{ component }}"
