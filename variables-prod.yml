@@ -2,3 +2,4 @@ login_user: root
 login_password: ExpenseApp1
 login_host: db-prod.expense.rskrishnacloudtech.online
 DB_HOST: db-prod.expense.rskrishnacloudtech.online
+BACKEND_API_URL: backend.app-prod.expense.rskrishnacloudtech.online
