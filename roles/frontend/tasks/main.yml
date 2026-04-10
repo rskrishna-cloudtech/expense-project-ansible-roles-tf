@@ -33,13 +33,13 @@
 # These above three steps are common for every role hence we kept them in a common role and importing that role to make the reusability.
 - name: Importing the common role.
   tags:
-  - deployment
+    - deployment
   ansible.builtin.import_role:
     name: common
     tasks_from: main.yml
 
-# Creating expense.conf.j2 file is created in /templates/ folder and configure the backend server host details inside it and copy this file to /etc/nginx/default.d/expense.conf
-- name: Create expense.conf file and configure the backend server details and copy this file to /etc/nginx/default.d/expense.conf.
+# Creating expense.conf.j2 file is created in /templates/ folder and configure the frontend server host details inside it and copy this file to /etc/nginx/default.d/expense.conf
+- name: Create expense.conf file and configure the frontend server details and copy this file to /etc/nginx/default.d/expense.conf.
   ansible.builtin.template:
     src: expense.conf.j2
     dest: /etc/nginx/default.d/expense.conf
@@ -47,7 +47,6 @@
   # Notifying the handler created in handler/ folder to restart the nginx service only when there is any changes in the expense.conf.j2 file.
   notify:
     - restart nginx
-
 # # Restarting the nginx service.
 # - name: Restart nginx service.
 #   ansible.builtin.service:
